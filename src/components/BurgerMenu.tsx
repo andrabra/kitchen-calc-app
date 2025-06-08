@@ -28,7 +28,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
 
       <Drawer
         title="Меню"
-        placement="left"
+        placement="right"
         onClose={closeDrawer}
         open={open}
         bodyStyle={{ padding: 0 }}
@@ -43,9 +43,9 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
         />
 
         <div className="flex items-center justify-between p-4 border-t mt-4">
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-2 m-0">
             {theme === 'dark' ? <BulbFilled /> : <BulbOutlined />}
-            <Title level={5} className="m-0">
+            <Title level={5} className="!m-0">
               Темная тема
             </Title>
           </span>
