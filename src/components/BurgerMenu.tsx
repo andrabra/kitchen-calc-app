@@ -31,7 +31,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
         placement="right"
         onClose={closeDrawer}
         open={open}
-        bodyStyle={{ padding: 0 }}
+        styles={{ body: { padding: 0 } }}
         className='bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors dark:text-white'
       >
         <Menu
