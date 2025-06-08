@@ -20,7 +20,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
     <>
       <button
         onClick={showDrawer}
-        className="text-xl p-0 border-0 bg-transparent bg-white dark:bg-zinc-600 dark:border-zinc-500 transition-colors dark:text-white"
+        className="text-xl p-0 border-0 bg-transparent bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors dark:text-white"
         aria-label="Открыть меню"
       >
         <MenuOutlined />
@@ -32,7 +32,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
         onClose={closeDrawer}
         open={open}
         bodyStyle={{ padding: 0 }}
-        className='bg-white dark:bg-zinc-600 dark:border-zinc-500 transition-colors dark:text-white'
+        className='bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors dark:text-white'
       >
         <Menu
           mode="inline"
@@ -43,7 +43,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
           ]}
         />
 
-        <div className="flex items-center justify-between p-4 border-t mt-4 bg-white dark:bg-zinc-600 dark:border-zinc-500 transition-colors">
+        <div className="flex items-center justify-between p-4 border-t mt-4 bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors">
           <span className="flex items-center gap-2 m-0">
             {theme === 'dark' ? <BulbFilled /> : <BulbOutlined />}
             <Title level={5} className="!m-0 dark:text-white">
