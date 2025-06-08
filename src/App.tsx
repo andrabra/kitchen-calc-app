@@ -13,10 +13,10 @@ const Recipes = lazy(() => import('./pages/Recipes'));
 const AppErrorBoundary = ({ children }: { children: React.ReactNode }) => {
   const [hasError, setHasError] = useState(false);
 
-  const handleOnError = (error: Error, info: { componentStack: string }) => {
-    console.error('Error caught by ErrorBoundary:', error, info);
-    setHasError(true);
-  };
+  // const handleOnError = (error: Error, info: { componentStack: string }) => {
+  //   console.error('Error caught by ErrorBoundary:', error, info);
+  //   setHasError(true);
+  // };
 
   if (hasError) {
     return (
@@ -48,7 +48,7 @@ const App = () => {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/recipes" element={<Recipes />} onMouseEnter={preloadRecipes} />
+              <Route path="/recipes" element={<Recipes />} />
             </Routes>
           </Layout>
         </Suspense>

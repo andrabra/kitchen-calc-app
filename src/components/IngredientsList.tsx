@@ -1,14 +1,14 @@
-import { Row, Col, Button, Space, Typography } from 'antd';
+import { Row, Col, Button, Typography } from 'antd';
 import { DeleteOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons';
 import { useState } from 'react';
-import Card from './Card.tsx';
+import Card, {type ingredient} from './Card.tsx';
 
 const { Title } = Typography;
 
 let idCounter = 1;
 
 const IngredientsList = () => {
-  const [ingredients, setIngredients] = useState([
+  const [ingredients, setIngredients] = useState<ingredient[]>([
     { id: idCounter++, name: '', weight: 0, originalWeight: null },
   ]);
   const [recipeSaved, setRecipeSaved] = useState(false);

@@ -1,13 +1,15 @@
 import { Card, Input, Row, Col, Typography, Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
+export type ingredient = {
+  id: number;
+  name: string;
+  weight: number;
+  originalWeight: number | null;
+}
+
 type Props = {
-  ingredient: {
-    id: number;
-    name: string;
-    weight: number;
-    originalWeight: number | null;
-  };
+  ingredient: ingredient;
   onChange: (id: number, key: 'name' | 'weight', value: string | number) => void;
   onDelete: () => void;
   onWeightScale: (id: number, newWeight: number) => void;
