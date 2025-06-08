@@ -5,6 +5,15 @@ on:
     branches:
       - main  # или твоя основная ветка, если не main
 
+# Устанавливает права GITHUB_TOKEN, чтобы разрешить развёртывание на GitHub Pages
+permissions:
+  contents: read # Мы разрешаем читать контент из нашего репозитория
+  pages: write # разрешаем перезаписывать github page
+  id-token: write # Разрешаем использовать GITHUB_TOKEN
+
+env:
+  PUBLIC_PATH: /github_actions/
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
