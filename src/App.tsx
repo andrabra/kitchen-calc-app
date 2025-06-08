@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {BrowserRouter, Routes, Route, HashRouter} from 'react-router-dom';
 import { lazy, Suspense,  } from 'react';
 import Home from './pages/Home';
 import Loader from './components/Loader';
@@ -35,7 +35,7 @@ const AppErrorBoundary = ({ children }: { children: React.ReactNode }) => {
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppErrorBoundary>
         <Suspense fallback={<Loader />}>
           <Layout>
@@ -46,7 +46,7 @@ const App = () => {
           </Layout>
         </Suspense>
       </AppErrorBoundary>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
