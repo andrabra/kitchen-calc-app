@@ -1,59 +1,65 @@
-import { useState } from 'react';
-import { Card, Input, Row, Col, Typography } from 'antd';
+import { Card, Input, Row, Col, Typography, Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
-const ResponsiveCard = () => {
-  const [title, setTitle] = useState('Ингредиент');
-  const [isEditing, setIsEditing] = useState(false);
-  const [tempTitle, setTempTitle] = useState(title);
-
-  const handleTitleClick = () => {
-    setIsEditing(true);
+type Props = {
+  ingredient: {
+    id: number;
+    name: string;
+    weight: number;
+    originalWeight: number | null;
   };
+  onChange: (id: number, key: 'name' | 'weight', value: string | number) => void;
+  onDelete: () => void;
+  onWeightScale: (id: number, newWeight: number) => void;
+  recipeSaved: boolean;
+};
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTempTitle(e.target.value);
-  };
-
-  const handleTitleBlur = () => {
-    setTitle(tempTitle.trim() || 'Ингредиент');
-    setIsEditing(false);
-  };
-
-  const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleTitleBlur();
+const IngredientCard = ({ ingredient, onChange, onDelete, onWeightScale, recipeSaved }: Props) => {
+  const handleWeightChange = (value: string) => {
+    const num = parseFloat(value);
+    onChange(ingredient.id, 'weight', isNaN(num) ? 0 : num);
+    if (recipeSaved) {
+      onWeightScale(ingredient.id, num);
     }
   };
 
-  const renderTitle = () =>
-      isEditing ? (
-          <Input
-              autoFocus
-              value={tempTitle}
-              onChange={handleTitleChange}
-              onBlur={handleTitleBlur}
-              onKeyDown={handleTitleKeyDown}
-              size="small"
-              style={{ maxWidth: 200 }}
-          />
-      ) : (
-          <Typography.Title level={5} style={{ margin: 0 }} onClick={handleTitleClick}>
-            {title}
-          </Typography.Title>
-      );
-
   return (
-      <Card title={renderTitle()} style={{ maxWidth: 600, margin: '0 auto' }}>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12}>
-            <Input placeholder="Название" />
-          </Col>
-          <Col xs={24} sm={12}>
-            <Input placeholder="Вес" />
-          </Col>
-        </Row>
-      </Card>
+    <Card
+      className="bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors"
+      title={
+        <Typography.Title
+          className="text-black dark:text-white"
+          level={5}
+          style={{ margin: 0 }}
+          editable={{
+            onChange: val => onChange(ingredient.id, 'name', val),
+          }}
+        >
+          {ingredient.name || 'Ингредиент'}
+        </Typography.Title>
+      }
+      extra={
+        <Button
+          type="text"
+          icon={<CloseOutlined />}
+          onClick={onDelete}
+          danger
+          aria-label="Удалить"
+        />
+      }
+    >
+      <Row gutter={[8, 8]}>
+        <Col span={24}>
+          <Input
+            placeholder="Вес, г"
+            type="number"
+            value={ingredient.weight}
+            onChange={e => handleWeightChange(e.target.value)}
+          />
+        </Col>
+      </Row>
+    </Card>
   );
 };
 
-export default ResponsiveCard;
+export default IngredientCard;

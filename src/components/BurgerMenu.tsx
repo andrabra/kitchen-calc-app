@@ -32,7 +32,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
         onClose={closeDrawer}
         open={open}
         styles={{ body: { padding: 0 } }}
-        className='bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors dark:text-white'
+        className="bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors dark:text-white"
       >
         <Menu
           mode="inline"
