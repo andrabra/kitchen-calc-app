@@ -84,6 +84,9 @@ const IngredientsList = () => {
           </ul>
         </div>
       )}
+      <Title className="text-black dark:text-white" level={4}>
+        Ингредиенты
+      </Title>
       <div className="pb-28 md:pb-0">
         <Row gutter={[16, 16]}>
           {ingredients.map(ing => (
@@ -100,7 +103,7 @@ const IngredientsList = () => {
         </Row>
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full bg-white dark:bg-zinc-800 p-2 border-t border-zinc-300 dark:border-zinc-600 md:static md:border-0">
+      <div className="fixed bottom-0 left-0 w-full bg-white dark:bg-zinc-800 py-2 border-t border-zinc-300 dark:border-zinc-600 md:static md:border-0">
         <div className="flex flex-col md:flex-row gap-2">
           <Button
             type="default"

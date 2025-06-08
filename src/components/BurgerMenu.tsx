@@ -35,6 +35,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
         className="bg-white dark:bg-zinc-800 dark:border-zinc-500 transition-colors dark:text-white"
       >
         <Menu
+          theme={theme}
           mode="inline"
           onClick={closeDrawer}
           items={[
