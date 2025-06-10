@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # или твоя основная ветка, если не main
+      - gh-pages  # или твоя основная ветка, если не main
 
 # Устанавливает права GITHUB_TOKEN, чтобы разрешить развёртывание на GitHub Pages
 permissions:
