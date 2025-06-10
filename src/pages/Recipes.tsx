@@ -4,7 +4,7 @@ import RecipeCard, { type Recipe } from '../components/RecipeCard';
 import { getRandomRecipes, type RecipeApi } from '../services/api';
 import { Button } from 'antd';
 
-const Home = () => {
+const Recipes = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,4 +64,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Recipes;
