@@ -22,7 +22,7 @@ const SearchBar = ({ onSearch, loading = false }: SearchBarProps) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onPressEnter={handleSubmit}
-        placeholder="Введите название рецепта"
+        placeholder="Введите название ингридиента или рецепта на английском"
         className="flex-grow"
       />
       <Button
