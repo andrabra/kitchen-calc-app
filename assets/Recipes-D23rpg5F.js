@@ -1,1 +1,0 @@
-import{j as i,m as t}from"./index-C4IrKRFL.js";const a=()=>i.jsx(t.div,{initial:{opacity:0},animate:{opacity:1},transition:{duration:.5},children:i.jsx("div",{className:"text-center",children:"Coming soon..."})});export{a as default};
