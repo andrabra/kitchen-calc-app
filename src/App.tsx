@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, HashRouter} from 'react-router-dom';
+import {Routes, Route, HashRouter} from 'react-router-dom';
 import { lazy, Suspense,  } from 'react';
 import Home from './pages/Home';
 import Loader from './components/Loader';
