@@ -17,7 +17,16 @@ const Recipes = () => {
       title: r.title,
       img: r.image,
       description: r.summary,
-      ingredients: r.extendedIngredients.map(i => i.original),
+      ingredients: Array.from(
+        new Set(
+          r.analyzedInstructions?.[0]?.steps?.flatMap(step =>
+            step.ingredients?.map(ing => ing.name),
+          ) || [],
+        ),
+      ),
+      steps: r.analyzedInstructions?.[0]?.steps?.length
+        ? r.analyzedInstructions[0].steps.map(step => step.step)
+        : [],
     }));
 
   const fetchRandomRecipes = async () => {
@@ -39,8 +48,9 @@ const Recipes = () => {
     setLoading(true);
     setError(null);
     try {
-      const result = await searchRecipes({ query, number: 10 });
-      const normalized = normalizeRecipes(result.recipes);
+      const result = await searchRecipes({ query });
+      console.log(result);
+      const normalized = normalizeRecipes(result.results);
       setSearchResults(normalized);
       setShowRandom(false); // скрываем случайные, если пользователь ищет
       setRandomRecipes([]); // очищаем случайные
