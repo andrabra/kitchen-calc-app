@@ -4,6 +4,7 @@ import RecipeCard, { type Recipe } from '../components/RecipeCard';
 import { getRandomRecipes, searchRecipes, type RecipeApi } from '../services/api';
 import { Button } from 'antd';
 import SearchBar from '../components/SearchBar';
+import { ClearOutlined } from '@ant-design/icons';
 
 const Recipes = () => {
   const [searchResults, setSearchResults] = useState<Recipe[]>([]);
@@ -11,6 +12,8 @@ const Recipes = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showRandom, setShowRandom] = useState(false); // когда true — показываем блок случайных рецептов
+  const [lastQuery, setLastQuery] = useState('');
+  const [searchOffset, setSearchOffset] = useState(0);
 
   const normalizeRecipes = (apiRecipes: RecipeApi[]): Recipe[] =>
     apiRecipes.map(r => ({
@@ -44,16 +47,25 @@ const Recipes = () => {
     }
   };
 
-  const fetchSearchRecipes = async (query: string) => {
+  const fetchSearchRecipes = async (query: string, append = false) => {
     setLoading(true);
     setError(null);
     try {
-      const result = await searchRecipes({ query });
-      console.log(result);
+      const result = await searchRecipes({
+        query,
+        number: 4,
+        offset: append ? searchOffset : 0,
+      });
+
       const normalized = normalizeRecipes(result.results);
-      setSearchResults(normalized);
-      setShowRandom(false); // скрываем случайные, если пользователь ищет
-      setRandomRecipes([]); // очищаем случайные
+
+      setSearchResults(prev => (append ? [...normalized, ...prev] : normalized));
+      setShowRandom(false);
+      setRandomRecipes([]);
+      setLastQuery(query);
+
+      // обновляем offset
+      setSearchOffset(prev => (append ? prev + 4 : 4));
     } catch (err) {
       setError('Ошибка при поиске рецептов');
       console.error('err', err);
@@ -63,7 +75,8 @@ const Recipes = () => {
   };
 
   const handleSearch = (query: string) => {
-    fetchSearchRecipes(query);
+    const isRepeat = query === lastQuery;
+    fetchSearchRecipes(query, isRepeat);
   };
 
   const handleRandomClick = () => {
@@ -76,6 +89,12 @@ const Recipes = () => {
 
   const recipesToDisplay = showRandom ? randomRecipes : searchResults;
 
+  const handleClearSearch = () => {
+    setSearchResults([]);
+    setLastQuery('');
+    setSearchOffset(0);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -84,6 +103,28 @@ const Recipes = () => {
       className="p-4"
     >
       <SearchBar onSearch={handleSearch} loading={loading} />
+      {!showRandom && searchResults.length > 0 && (
+        <div className="flex  sm:flex-row justify-center items-center gap-2 mt-4">
+          <Button
+            type="default"
+            className="w-full sm:w-auto mx-auto text-black dark:text-white bg-white dark:bg-zinc-800 dark:border-zinc-900 transition-colors"
+            onClick={() => fetchSearchRecipes(lastQuery, true)}
+            loading={loading}
+            disabled={loading}
+          >
+            Загрузить ещё
+          </Button>
+          <Button
+            type="default"
+            className="w-full sm:w-auto mx-auto text-black dark:text-white bg-white dark:bg-zinc-800 dark:border-zinc-900 transition-colors"
+            onClick={handleClearSearch}
+            disabled={loading}
+            icon={<ClearOutlined />}
+          >
+            Очистить поиск
+          </Button>
+        </div>
+      )}
 
       {loading && <p>Загрузка рецептов...</p>}
       {error && <p className="text-red-500">{error}</p>}

@@ -65,7 +65,7 @@ export const getRandomRecipes = async (count = 1): Promise<RecipeApi[]> => {
 // Новый метод для поиска рецептов
 export const searchRecipes = async (params: SearchParams): Promise<SearchResponse> => {
   const response = await axios.get<SearchResponse>(
-    `http://localhost:3000/api/recipes/search`,
+    `https://kitchen-calc-backend.onrender.com/api/recipes/search`,
     {
       params: {
         query: params.query,
