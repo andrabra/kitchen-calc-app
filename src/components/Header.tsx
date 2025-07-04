@@ -4,6 +4,7 @@ import BurgerMenu from './BurgerMenu';
 
 const getPageTitle = (pathname: string) => {
   if (pathname.startsWith('/recipes')) return 'Рецепты';
+  if (pathname.startsWith('/timer')) return 'Таймер';
   return 'Кухонный калькулятор';
 };
 

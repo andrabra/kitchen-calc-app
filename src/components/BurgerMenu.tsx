@@ -41,6 +41,7 @@ const BurgerMenu = ({ theme, toggleTheme }: BurgerMenuProps) => {
           items={[
             { key: 'home', label: <Link to="/">Главная</Link> },
             { key: 'recipes', label: <Link to="/recipes">Рецепты</Link> },
+            { key: 'timer', label: <Link to="/timer">Таймер</Link> },
           ]}
         />
 

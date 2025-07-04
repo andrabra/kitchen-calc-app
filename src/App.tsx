@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Loader from './components/Loader';
 import * as React from 'react';
 import Layout from './components/Layout.tsx';
+import Timer from './components/Timer.tsx';
 
 // Ленивая загрузка компонентов
 const Recipes = lazy(() => import('./pages/Recipes'));
@@ -42,6 +43,7 @@ const App = () => {
             <Routes>
               <Route path="/*" element={<Home />} />
               <Route path="/recipes" element={<Recipes />} />
+              <Route path="/timer" element={<Timer />} />
             </Routes>
           </Layout>
         </Suspense>
